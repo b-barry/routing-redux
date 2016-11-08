@@ -8,4 +8,9 @@ const categories = [
 
 export default categories;
 
+export interface Category{
+  name: string;
+  selected: boolean;
+}
+
 

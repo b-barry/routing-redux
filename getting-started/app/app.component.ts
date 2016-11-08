@@ -1,31 +1,35 @@
 import { Component } from '@angular/core';
+import { Book, mockBooks } from './mocks/books';
+import mockCategories, { Category } from './mocks/categories';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-// Book Type
-export class Book {
-  title: Number;
-  cover: String;
-  category: String;
-}
 
-// TODO: Category Type
-export class Category {}
+
 
 @Component({
   selector: 'bookstore',
-  // template: ``,
   templateUrl: '../app/app.template.html'
 })
 
 export class AppComponent {
-  books: Book [] = []; // use mocks data instead
-  categories: String [] = ['All', 'Web']; // use mocks data instead
+  books: Observable<Object>; // use mocks data instead
+  categories: Observable<Object>; // use mocks data instead
   navClosed: Boolean = true;
 
-  clicked() {
-    console.log('Will be implemented in the next section');
+  constructor(private store: Store<any>) {
+    this.books = this.store.select('books');
+    this.categories = this.store.select('categories');
   }
-
-  search(){}
+  clicked() {
+    this.store.dispatch({ type: 'ALL_BOOKS' });
+  }
+  changeSelectedCategory({name}) {
+    this.store.dispatch({ type: 'CHANGE_CATEGORY', payload: name });
+  }
+  search(searchTerm) {
+    this.store.dispatch({ type: 'SEARCH', payload: searchTerm });
+  }
 
   toggleSideBar(){
     this.navClosed = !this.navClosed;
