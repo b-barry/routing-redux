@@ -4,10 +4,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
 import { mockBooks } from './mocks/books';
 import mockCategories from './mocks/categories';
-
+import { createStore, combineReducers } from 'redux';
 export const getBooksReducer = (state = mockBooks, action: any) => {
   switch (action.type) {
     case 'CHANGE_CATEGORY':
@@ -57,15 +56,15 @@ export const getFilterReducer = (state = (el) => { el }, action) => {
   }
 }
 
-
+export const store = createStore(combineReducers({
+  books: getBooksReducer,
+  categories: getCategoriesReducer
+}))
 
 @NgModule({
   imports: [
     BrowserModule,
-    StoreModule.provideStore({
-      books: getBooksReducer,
-      categories: getCategoriesReducer
-    })
+
   ], // Inject built-in modules
   declarations: [AppComponent], // Inject your own modules
   bootstrap: [AppComponent] // Module you need to bootstrap

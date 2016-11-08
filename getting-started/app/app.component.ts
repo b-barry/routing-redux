@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { Book, mockBooks } from './mocks/books';
 import mockCategories, { Category } from './mocks/categories';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-
+import { store } from './app.module';
 
 
 
@@ -13,13 +11,18 @@ import { Observable } from 'rxjs';
 })
 
 export class AppComponent {
-  books: Observable<Object>; // use mocks data instead
-  categories: Observable<Object>; // use mocks data instead
+  books: Book[]; // use mocks data instead
+  categories: Category[]; // use mocks data instead
   navClosed: Boolean = true;
+  store = store
+  constructor() {
+    this.books = this.store.getState().books;
+    this.categories = this.store.getState().categories;
 
-  constructor(private store: Store<any>) {
-    this.books = this.store.select('books');
-    this.categories = this.store.select('categories');
+    this.store.subscribe(() => {
+      this.books = this.store.getState().books;
+      this.categories = this.store.getState().categories;
+    });
   }
   clicked() {
     this.store.dispatch({ type: 'ALL_BOOKS' });
@@ -31,7 +34,7 @@ export class AppComponent {
     this.store.dispatch({ type: 'SEARCH', payload: searchTerm });
   }
 
-  toggleSideBar(){
+  toggleSideBar() {
     this.navClosed = !this.navClosed;
   }
 }

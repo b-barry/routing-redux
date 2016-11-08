@@ -13,7 +13,7 @@
             <li class="placeholder">
                 <a data-type="all" href="#0">All</a>
             </li>
-            <li *ngFor="let category of categories | async">
+            <li *ngFor="let category of categories ">
                 <a [class.selected]="category.selected" href="#0" (click)="changeSelectedCategory(category)">{{category.name}}</a>
             </li>
             </ul>
@@ -23,7 +23,7 @@
     <!--List of books-->
     <section class="gallery">
         <ul>
-            <li *ngFor="let book of books | async"><img [src]="book.cover" (click)="clicked()"/></li>
+            <li *ngFor="let book of books "><img [src]="book.cover" (click)="clicked()"/></li>
         </ul>
     </section>
 
