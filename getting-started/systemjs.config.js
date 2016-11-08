@@ -26,7 +26,8 @@
       'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
       '@ngrx/core':'npm:@ngrx/core/bundles/core.umd.js',
       '@ngrx/store': 'npm:@ngrx/store/bundles/store.umd.js',
-      'redux':'npm:redux/dist/redux.js'
+      'redux': 'npm:redux/dist/redux.js',
+      '@angular/router':'npm:@angular/router/bundles/router.umd.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

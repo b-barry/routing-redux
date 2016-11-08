@@ -14,7 +14,8 @@
                 <a data-type="all" href="#0">All</a>
             </li>
             <li *ngFor="let category of categories ">
-                <a [class.selected]="category.selected" href="#0" (click)="changeSelectedCategory(category)">{{category.name}}</a>
+                <a [routerLink]="['',  category.name]" routerLinkActive="selected" >{{category.name}}</a>
+                <!--<a [class.selected]="category.selected" href="#0" (click)="changeSelectedCategory(category)">{{category.name}}</a>-->
             </li>
             </ul>
         </div>
